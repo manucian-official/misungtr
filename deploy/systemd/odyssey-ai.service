@@ -1,0 +1,16 @@
+[Unit]
+Description=Local Oddity AI Workspace
+Requires=docker.service
+After=docker.service
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/local-oddity-ai-workspace
+ExecStart=/usr/bin/docker compose -f docker-compose.yml -f docker-compose.prod.yml up
+ExecStop=/usr/bin/docker compose -f docker-compose.yml -f docker-compose.prod.yml down
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+

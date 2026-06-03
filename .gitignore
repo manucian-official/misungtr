@@ -8,3 +8,8 @@ workspace_data/
 models/*.gguf
 .pytest_cache/
 logs/
+backups/
+apps/web/playwright-report/
+apps/web/test-results/
+.playwright/
+.tmp/

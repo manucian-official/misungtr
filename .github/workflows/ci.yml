@@ -30,4 +30,7 @@ jobs:
         working-directory: apps/web
       - run: npm run build
         working-directory: apps/web
-
+      - run: npx playwright install --with-deps chromium
+        working-directory: apps/web
+      - run: npm run test:e2e
+        working-directory: apps/web

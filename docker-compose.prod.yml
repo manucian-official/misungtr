@@ -1,0 +1,39 @@
+services:
+  backend:
+    restart: unless-stopped
+    environment:
+      APP_ENV: production
+      CORS_ORIGINS: http://localhost,http://127.0.0.1
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=5)"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile.prod
+      args:
+        VITE_API_BASE_URL: /api
+    environment:
+      VITE_API_BASE_URL: /api
+    restart: unless-stopped
+    ports: !override
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  ollama:
+    restart: unless-stopped
+
+  searxng:
+    restart: unless-stopped
+
+  mcp-workspace:
+    restart: unless-stopped
+
+  mcp-search:
+    restart: unless-stopped
