@@ -1,4 +1,4 @@
-mcp==1.2.1
+mcp==1.23.0
 httpx==0.28.1
 pydantic-settings==2.7.1
 
